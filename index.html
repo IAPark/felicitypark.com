@@ -1,16 +1,10 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Main</title>
+  <title>CLUE</title>
   <script src="elm.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Neonderthaw&display=swap');
-
-    /*body {
-      background-color: black;
-      color: white;
-
-    }*/
 
     div.error {
       background-color: red;
@@ -18,7 +12,8 @@
     body {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
-      grid-template-rows: 1fr auto 1fr;
+      grid-template-rows: 1fr auto 2fr;
+      height: 100%;
     }
 
     .content {
@@ -53,6 +48,14 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
+    }
+
+    .view-locked {
+      display: grid;
+    }
+
+    .view-unlocked {
+      font-size: 2em;
     }
   </style>
 </head>
