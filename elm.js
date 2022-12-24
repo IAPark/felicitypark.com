@@ -4370,10 +4370,12 @@ function _Browser_load(url)
 		}
 	}));
 }
-var $author$project$Page$Locked = function (a) {
-	return {$: 'Locked', a: a};
-};
-var $author$project$Page$init = $author$project$Page$Locked('');
+var $elm$core$Basics$False = {$: 'False'};
+var $author$project$Page$Locked = F2(
+	function (a, b) {
+		return {$: 'Locked', a: a, b: b};
+	});
+var $author$project$Page$init = A2($author$project$Page$Locked, '', false);
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -4475,7 +4477,6 @@ var $elm$core$Result$Ok = function (a) {
 var $elm$json$Json$Decode$OneOf = function (a) {
 	return {$: 'OneOf', a: a};
 };
-var $elm$core$Basics$False = {$: 'False'};
 var $elm$core$Basics$add = _Basics_add;
 var $elm$core$Maybe$Just = function (a) {
 	return {$: 'Just', a: a};
@@ -5184,47 +5185,38 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			view: impl.view
 		});
 };
-var $author$project$Page$Failed = function (a) {
-	return {$: 'Failed', a: a};
-};
 var $author$project$Page$Unlocked = {$: 'Unlocked'};
+var $author$project$Page$passsword = 42;
 var $author$project$Page$update = F2(
 	function (msg, model) {
 		var _v0 = _Utils_Tuple2(msg, model);
-		_v0$3:
+		_v0$2:
 		while (true) {
 			if (_v0.a.$ === 'Change') {
-				switch (_v0.b.$) {
-					case 'Locked':
-						var newString = _v0.a.a;
-						return $author$project$Page$Locked(newString);
-					case 'Failed':
-						var newString = _v0.a.a;
-						return $author$project$Page$Locked(newString);
-					default:
-						break _v0$3;
+				if (_v0.b.$ === 'Locked') {
+					var newString = _v0.a.a;
+					var _v1 = _v0.b;
+					var error = _v1.b;
+					return A2($author$project$Page$Locked, newString, error);
+				} else {
+					break _v0$2;
 				}
 			} else {
 				if (_v0.b.$ === 'Locked') {
-					var _v1 = _v0.a;
-					var value = _v0.b.a;
-					return (value === 'test') ? $author$project$Page$Unlocked : $author$project$Page$Failed(value);
+					var _v2 = _v0.a;
+					var _v3 = _v0.b;
+					var value = _v3.a;
+					var error = _v3.b;
+					return _Utils_eq(
+						$elm$core$String$toInt(value),
+						$elm$core$Maybe$Just($author$project$Page$passsword)) ? $author$project$Page$Unlocked : A2($author$project$Page$Locked, '', true);
 				} else {
-					break _v0$3;
+					break _v0$2;
 				}
 			}
 		}
 		return model;
 	});
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Page$Change = function (a) {
-	return {$: 'Change', a: a};
-};
-var $author$project$Page$Check = {$: 'Check'};
-var $elm$html$Html$br = _VirtualDom_node('br');
-var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5234,31 +5226,13 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			$elm$json$Json$Encode$string(string));
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $author$project$Page$Change = function (a) {
+	return {$: 'Change', a: a};
 };
-var $elm$html$Html$Attributes$classList = function (classes) {
-	return $elm$html$Html$Attributes$class(
-		A2(
-			$elm$core$String$join,
-			' ',
-			A2(
-				$elm$core$List$map,
-				$elm$core$Tuple$first,
-				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
-};
+var $author$project$Page$Check = {$: 'Check'};
+var $elm$html$Html$button = _VirtualDom_node('button');
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -5277,6 +5251,25 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$json$Json$Decode$andThen = _Json_andThen;
+var $elm$json$Json$Decode$fail = _Json_fail;
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $elm$html$Html$Events$keyCode = A2($elm$json$Json$Decode$field, 'keyCode', $elm$json$Json$Decode$int);
+var $kmbn$elm_hotkeys$Hotkeys$onKeyCode = F2(
+	function (expectedCode, msg) {
+		var isExpectedCode = function (currentCode) {
+			return _Utils_eq(currentCode, expectedCode) ? $elm$json$Json$Decode$succeed(msg) : $elm$json$Json$Decode$fail(
+				'not ' + $elm$core$String$fromInt(expectedCode));
+		};
+		return A2(
+			$elm$html$Html$Events$on,
+			'keydown',
+			A2($elm$json$Json$Decode$andThen, isExpectedCode, $elm$html$Html$Events$keyCode));
+	});
+var $kmbn$elm_hotkeys$Hotkeys$onEnter = function (msg) {
+	return A2($kmbn$elm_hotkeys$Hotkeys$onKeyCode, 13, msg);
+};
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
@@ -5290,7 +5283,6 @@ var $elm$html$Html$Events$stopPropagationOn = F2(
 			event,
 			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
 	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$at = F2(
 	function (fields, decoder) {
 		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
@@ -5311,6 +5303,15 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Page$viewLocked = F2(
 	function (s, error) {
@@ -5318,24 +5319,75 @@ var $author$project$Page$viewLocked = F2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$classList(
-					_List_fromArray(
-						[
-							_Utils_Tuple2('error', error)
-						]))
+					$elm$html$Html$Attributes$class('view-locked')
 				]),
 			_List_fromArray(
 				[
 					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('clue')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('On the bottom of your clues you will find the number to substitute for a \"a\", on your next clue you shall find \"b\", and on your last clue \"c\"')
+						])),
+					error ? A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('math')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$span,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Try solving for x again')
+								])),
+							A2(
+							$elm$html$Html$img,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$src('math_equation.jpg')
+								]),
+							_List_Nil)
+						])) : A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('math')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$span,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Solve for x:')
+								])),
+							A2(
+							$elm$html$Html$img,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$src('math_equation.jpg')
+								]),
+							_List_Nil)
+						])),
+					A2(
 					$elm$html$Html$input,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$placeholder('Enter the code here!'),
+							$elm$html$Html$Attributes$placeholder('Enter the value for X'),
 							$elm$html$Html$Attributes$value(s),
-							$elm$html$Html$Events$onInput($author$project$Page$Change)
+							$elm$html$Html$Events$onInput($author$project$Page$Change),
+							$kmbn$elm_hotkeys$Hotkeys$onEnter($author$project$Page$Check)
 						]),
 					_List_Nil),
-					A2($elm$html$Html$br, _List_Nil, _List_Nil),
 					A2(
 					$elm$html$Html$button,
 					_List_fromArray(
@@ -5348,23 +5400,69 @@ var $author$project$Page$viewLocked = F2(
 						]))
 				]));
 	});
+var $author$project$Page$viewUnlocked = A2(
+	$elm$html$Html$div,
+	_List_fromArray(
+		[
+			$elm$html$Html$Attributes$class('view-unlocked')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Trailer comes at last')
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Heralding the main feature')
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Returning, again and again')
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('A preview of what\'s to come')
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('A trailer\'s endless fun')
+				]))
+		]));
 var $author$project$Page$view = function (model) {
-	switch (model.$) {
-		case 'Locked':
-			var s = model.a;
-			return A2($author$project$Page$viewLocked, s, false);
-		case 'Failed':
-			var s = model.a;
-			return A2($author$project$Page$viewLocked, s, true);
-		default:
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('unlocked')
-					]));
-	}
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('content')
+			]),
+		_List_fromArray(
+			[
+				function () {
+				if (model.$ === 'Locked') {
+					var s = model.a;
+					var error = model.b;
+					return A2($author$project$Page$viewLocked, s, error);
+				} else {
+					return $author$project$Page$viewUnlocked;
+				}
+			}()
+			]));
 };
 var $author$project$Page$main = $elm$browser$Browser$sandbox(
 	{init: $author$project$Page$init, update: $author$project$Page$update, view: $author$project$Page$view});
