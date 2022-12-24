@@ -5346,7 +5346,7 @@ var $author$project$Page$viewLocked = F2(
 							_List_Nil,
 							_List_fromArray(
 								[
-									$elm$html$Html$text('Try solving for x again')
+									$elm$html$Html$text('That was wrong. Try solving for x again')
 								])),
 							A2(
 							$elm$html$Html$img,

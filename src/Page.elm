@@ -49,7 +49,7 @@ viewLocked s error = div [class "view-locked"] [
         ],
         if error then
             div [class "math"] [
-                span [] [text "Try solving for x again" ],
+                span [] [text "That was wrong. Try solving for x again" ],
                 img [src "math_equation.jpg"] []
             ]
         else
